@@ -2,9 +2,9 @@ const { Client, LocalAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode-terminal");
 
 // === GENEARTE NEW CLIENT
-const client = new Client({
+const botClient = new Client({
   qrMaxRetries: 1,
-  authTimeoutMs: 5000,
+  authTimeoutMs: 60000,
   authStrategy: new LocalAuth({
     dataPath: "./.auth",
   }),
@@ -21,12 +21,12 @@ const client = new Client({
   },
 });
 
-client.on("qr", (qr) => {
+botClient.on("qr", (qr: string) => {
   qrcode.generate(qr, { small: true });
 });
 
-client.on("ready", () => {
+botClient.on("ready", () => {
   console.log("Client is ready!");
 });
 
-client.initialize();
+export default botClient;
