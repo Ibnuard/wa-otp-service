@@ -37,3 +37,13 @@ export const saveReportData = (
 
   fs.writeFileSync(path, newData);
 };
+
+// ==== load report data
+export const loadReportData = () => {
+  const path = "./src/store/reports.json";
+
+  const existingData = fs.readFileSync(path);
+  const parseExistingData = JSON.parse(existingData);
+
+  return parseExistingData;
+};
